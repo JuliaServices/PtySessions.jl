@@ -3,6 +3,11 @@ on:
   issue_comment:
     types: [created]
   workflow_dispatch:
+# The repository's default GITHUB_TOKEN is read-only; TagBot creates tags and releases,
+# and opens an issue when it fails.
+permissions:
+  contents: write
+  issues: write
 jobs:
   TagBot:
     if: github.event_name == 'workflow_dispatch' || github.actor == 'JuliaTagBot'
